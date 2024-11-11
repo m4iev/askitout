@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            // Foreign id for question model
+            $table->foreignIdFor(Question::class);
             $table->foreignIdFor(User::class);
             $table->text('body');
             $table->boolean('is_accepted');
