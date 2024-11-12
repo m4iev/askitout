@@ -12,4 +12,14 @@ class Vote extends Model
         'voteable_type',
         'vote'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function voteable()
+    {
+        return $this->morphTo();
+    }
 }
