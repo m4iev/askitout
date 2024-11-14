@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Question;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class QuestionSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Question::factory(20)->create();
+        User::factory(count: 10)->create();
     }
 }

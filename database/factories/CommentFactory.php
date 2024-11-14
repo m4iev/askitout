@@ -28,7 +28,7 @@ class CommentFactory extends Factory
         
         return [
             'user_id' => User::factory(),
-            'commentable_id' => $commentable_type::factory(), // belum tau work atau tidak
+            'commentable_id' => $commentable_type::factory(),
             'commentable_type' => $commentable_type,
             'body' => fake()->sentence()
         ];
