@@ -5,10 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <title>AskItOut</title>
 </head>
 
-<body class="bg-slate-700">
+<body class="bg-slate-700 font-hanken-grotesk">
     <header class="bg-white dark:bg-gray-900">
         <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
@@ -27,45 +32,11 @@
                     <nav aria-label="Global">
                         <ul class="flex items-center gap-6 text-sm">
                             <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="#">
-                                    About
-                                </a>
+                                <x-nav-link href="#">Questions</x-nav-link>
                             </li>
 
                             <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="#">
-                                    Careers
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="#">
-                                    History
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="#">
-                                    Services
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="#">
-                                    Projects
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75"
-                                    href="#">
-                                    Blog
-                                </a>
+                                <x-nav-link href="#">Tags</x-nav-link>
                             </li>
                         </ul>
                     </nav>
@@ -73,16 +44,10 @@
 
                 <div class="flex items-center gap-4">
                     <div class="sm:flex sm:gap-4">
-                        <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500"
-                            href="#">
-                            Login
-                        </a>
+                        <x-nav-button>Login</x-nav-button>
 
                         <div class="hidden sm:flex">
-                            <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 dark:bg-gray-800 dark:text-white dark:hover:text-white/75"
-                                href="#">
-                                Register
-                            </a>
+                            <x-nav-button type="secondary">Register</x-nav-button>
                         </div>
                     </div>
 
