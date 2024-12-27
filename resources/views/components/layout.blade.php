@@ -18,7 +18,7 @@
         <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
                 <div class="md:flex md:items-center md:gap-12">
-                    <a class="block text-teal-600 dark:text-teal-600" href="#">
+                    <a class="block text-teal-600 dark:text-teal-600" href="/">
                         <span class="sr-only">Home</span>
                         <svg class="h-8" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -32,11 +32,11 @@
                     <nav aria-label="Global">
                         <ul class="flex items-center gap-6 text-sm">
                             <li>
-                                <x-nav-link href="#">Questions</x-nav-link>
+                                <x-nav-link href="/questions">Questions</x-nav-link>
                             </li>
 
                             <li>
-                                <x-nav-link href="#">Tags</x-nav-link>
+                                <x-nav-link href="/tags">Tags</x-nav-link>
                             </li>
                         </ul>
                     </nav>
@@ -44,10 +44,10 @@
 
                 <div class="flex items-center gap-4">
                     <div class="sm:flex sm:gap-4">
-                        <x-nav-button>Login</x-nav-button>
+                        <x-nav-button href="/login">Login</x-nav-button>
 
                         <div class="hidden sm:flex">
-                            <x-nav-button type="secondary">Register</x-nav-button>
+                            <x-nav-button type="secondary" href="/register">Register</x-nav-button>
                         </div>
                     </div>
 

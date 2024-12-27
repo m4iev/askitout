@@ -23,11 +23,12 @@
     </section>
 
     <section class="mt-20">
-        <x-section-header>Featured Question</x-section-header>
+        <x-section-header>Popular Question</x-section-header>
 
         <div class="flex flex-col items-center gap-4 mt-6">
-            <x-question-card></x-question-card>
-            <x-question-card></x-question-card>
+            @foreach ($questions as $question)
+            <x-question-card :$question></x-question-card>
+            @endforeach
         </div>
     </section>
 
@@ -35,8 +36,9 @@
         <x-section-header box_color="amber-500">Recent Questions</x-section-header>
 
         <div class="flex flex-col items-center gap-4 mt-6">
-            <x-question-card></x-question-card>
-            <x-question-card></x-question-card>
+            @foreach ($questions as $question)
+            <x-question-card :$question></x-question-card>
+            @endforeach
         </div>
     </section>
 </x-layout>
