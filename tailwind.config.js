@@ -15,6 +15,9 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 'hanken-grotesk': ['Hanken Grotesk', 'sans-serif']
             },
+            backgroundImage: {
+                'hero-image': "url('/resources/images/hero-image.jpg')"
+            },
         },
     },
     plugins: [

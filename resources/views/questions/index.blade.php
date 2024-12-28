@@ -3,7 +3,7 @@
         <div class="w-full flex flex-col items-center gap-6  mt-20">
             <h2 class="text-4xl text-white text-center font-bold">Find a Question</h2>
             <form action="" class="max-w-lg flex justify-between items-center">
-                <input type="text" id="search" name="search" placeholder="Laravel routing..."
+                <input type="text" id="q" name="q" placeholder="Laravel routing..."
                     class="w-full rounded-xl border-gray-200 py-4 pe-10 shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white border-2 border-transparent hover:border-gray-100 transition-colors duration-400" />
                 <div>
                     <span class="w-10">
@@ -19,16 +19,6 @@
                     </span>
                 </div>
             </form>
-        </div>
-    </section>
-
-    <section class="mt-20">
-        <x-section-header>Popular Question</x-section-header>
-
-        <div class="flex flex-col items-center gap-4 mt-6">
-            @foreach ($questions as $question)
-            <x-question-card :$question></x-question-card>
-            @endforeach
         </div>
     </section>
 
