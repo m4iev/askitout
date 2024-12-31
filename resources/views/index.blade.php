@@ -29,7 +29,7 @@
                         Ask a question
                     </a>
 
-                    <a href="#"
+                    <a href="/questions"
                         class="block w-full rounded bg-gray-800 px-12 py-3 text-sm font-medium text-white shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
                         View all questions
                     </a>

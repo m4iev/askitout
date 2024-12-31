@@ -42,14 +42,26 @@
                     </nav>
                 </div>
 
+
                 <div class="flex items-center gap-4">
+                    @guest
                     <div class="sm:flex sm:gap-4">
                         <x-nav-button href="/login">Login</x-nav-button>
 
-                        <div class="hidden sm:flex">
-                            <x-nav-button type="secondary" href="/register">Register</x-nav-button>
-                        </div>
+                        <x-nav-button type="secondary" href="/register">Register</x-nav-button>
                     </div>
+                    @endguest
+
+                    @auth
+                    <div class="sm:flex sm:gap-4">
+                        <x-nav-button>Ask a question</x-nav-button>
+                        <form method="POST" action="/logout">
+                            @csrf
+                            @method('DELETE')
+                            <x-button type="secondary">Logout</x-button>
+                        </form>
+                    </div>
+                    @endauth
 
                     <div class="block md:hidden">
                         <button

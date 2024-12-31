@@ -1,5 +1,4 @@
 <x-layout>
-
     <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div class="mx-auto max-w-lg">
             <h1 class="text-center text-2xl font-bold text-white sm:text-3xl">Get started today</h1>
@@ -9,7 +8,7 @@
                 inventore quaerat mollitia?
             </p>
 
-            <form action="/login" method="POST"
+            <form action="/register" method="POST"
                 class="bg-gray-900 mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
                 @csrf
                 <p class="text-center text-lg font-medium text-white">Create your account</p>
@@ -19,8 +18,14 @@
 
                     <div class="relative">
                         <input type="text" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter your full name" name="name"/>
-                        </div>
+                            placeholder="Enter your full name" name="name" value="{{ old('name') }}" required/>
+                    </div>
+
+                    @error('name')
+                    <div>
+                        <p class="text-sm text-red-700">{{ $message }}</p>
+                    </div>
+                    @enderror
                 </div>
 
                 <div>
@@ -28,7 +33,7 @@
 
                     <div class="relative">
                         <input type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter email" name="email"/>
+                            placeholder="Enter email" name="email" value="{{ old('email') }}" required/>
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
@@ -38,6 +43,12 @@
                             </svg>
                         </span>
                     </div>
+
+                    @error('email')
+                    <div>
+                        <p class="text-sm text-red-700">{{ $message }}</p>
+                    </div>
+                    @enderror
                 </div>
 
                 <div>
@@ -45,7 +56,7 @@
 
                     <div class="relative">
                         <input type="password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter password" name="password"/>
+                            placeholder="Enter password" name="password" required/>
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
@@ -57,6 +68,12 @@
                             </svg>
                         </span>
                     </div>
+
+                    @error('password')
+                    <div>
+                        <p class="text-sm text-red-700">{{ $message }}</p>
+                    </div>
+                    @enderror
                 </div>
 
                 <div>
@@ -64,7 +81,7 @@
 
                     <div class="relative">
                         <input type="password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Confirm your password" name="password_confirmation"/>
+                            placeholder="Confirm your password" name="password_confirmation" required/>
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"

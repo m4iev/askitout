@@ -8,7 +8,8 @@
                 inventore quaerat mollitia?
             </p>
 
-            <form action="/login" method="POST" class="bg-gray-900 mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+            <form action="/login" method="POST"
+                class="bg-gray-900 mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
                 @csrf
                 <p class="text-center text-lg font-medium text-white">Sign in to your account</p>
 
@@ -17,7 +18,7 @@
 
                     <div class="relative">
                         <input type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter email" />
+                            placeholder="Enter email" name="email" required />
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
@@ -34,7 +35,7 @@
 
                     <div class="relative">
                         <input type="password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                            placeholder="Enter password" />
+                            placeholder="Enter password" name="password" required />
 
                         <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none"
@@ -47,6 +48,12 @@
                         </span>
                     </div>
                 </div>
+
+                @error('all')
+                <div>
+                    <p class="text-sm text-red-700">{{ $message }}</p>
+                </div>
+                @enderror
 
                 <button type="submit"
                     class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white">
