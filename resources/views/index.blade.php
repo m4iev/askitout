@@ -24,7 +24,7 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-4 text-center">
-                    <a href="{{ Auth::check() ? '/questions' : '/register' }}"
+                    <a href="{{ Auth::check() ? '/questions/create' : '/register' }}"
                         class="block w-full rounded bg-teal-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
                         Ask a question
                     </a>

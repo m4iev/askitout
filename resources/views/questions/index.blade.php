@@ -29,6 +29,8 @@
             @foreach ($questions as $question)
             <x-question-card :$question></x-question-card>
             @endforeach
+
+            {{ $questions->links() }}
         </div>
     </section>
 </x-layout>

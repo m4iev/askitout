@@ -6,10 +6,10 @@
 @endphp
 <div
     class="flex items-start gap-4 p-4 sm:p-6 lg:p-8 rounded-xl border-2 border-transparent hover:border-gray-100 hover:cursor-pointer bg-gray-800 mx-4 transition-colors duration-500 group w-3/4">
-    <a href="#" class="block shrink-0">
+    <div class="block shrink-0">
         <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
             class="size-14 rounded-lg object-cover" />
-    </a>
+    </div>
     <div>
         <h3 class="font-medium sm:text-lg text-white">
             {{ $question->title }}
@@ -29,7 +29,7 @@
             <span class="hidden sm:block" aria-hidden="true">&middot;</span>
             <p class="hidden sm:block sm:text-xs sm:text-gray-500">
                 Asked {{ $question->created_at }} by
-                <a href="#" class="font-medium underline hover:text-gray-700">{{ $question->user->name }}</a>
+                <a href="/user/{{ $question->user->id }}" class="font-medium underline hover:text-gray-700">{{ $question->user->name }}</a>
             </p>
         </div>
     </div>

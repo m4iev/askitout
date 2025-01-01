@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -12,7 +13,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::latest()->limit(3)->with(['user', 'tags', 'answers', 'comments'])->get();
+        $questions = Question::latest()->limit(3)->with(['user', 'tags', 'answers', 'comments'])->simplePaginate(3);
 
         return view('questions.index', [
             'questions' => $questions
@@ -24,7 +25,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('questions.create');
     }
 
     /**
@@ -32,7 +33,21 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $questionAttributes = $request->validate([
+            'title' => ['required', 'max:255'],
+            'body' => ['required'],
+            'tags' => ['nullable']
+        ]);
+
+        $question = Auth::user()->questions()->create($questionAttributes);
+
+        if ($questionAttributes['tags'] ?? false) {
+            foreach (explode(',', $questionAttributes['tags']) as $tag) {
+                $question->tag(name: $tag);
+            }
+        }
+
+        return redirect("/questions/{$question->id}");
     }
 
     /**
@@ -40,7 +55,10 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        $question = Question::find($question->id);
+        return view('questions.show', [
+            'question' => $question
+        ]);
     }
 
     /**

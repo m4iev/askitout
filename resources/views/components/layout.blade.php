@@ -54,7 +54,7 @@
 
                     @auth
                     <div class="sm:flex sm:gap-4">
-                        <x-nav-button>Ask a question</x-nav-button>
+                        <x-nav-button href="/questions/create">Ask a question</x-nav-button>
                         <form method="POST" action="/logout">
                             @csrf
                             @method('DELETE')

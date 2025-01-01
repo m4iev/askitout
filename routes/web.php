@@ -11,6 +11,10 @@ Route::get('/', function() {
 });
 
 Route::get('/questions', [QuestionController::class, 'index']);
+Route::get('/questions/create', [QuestionController::class, 'create'])->middleware('auth');
+
+Route::get('/questions/{question}', [QuestionController::class, 'show']);
+Route::post('/questions', [QuestionController::class, 'store'])->middleware('auth');
 
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tag/{tag:name}', [TagController::class, 'show']);
