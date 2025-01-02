@@ -6,7 +6,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('index');
 });
 
@@ -26,5 +26,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionController::class, 'create']);
     Route::post('/login', [SessionController::class, 'store']);
 });
+
+Route::get('/profiles/{user}', [RegisteredUserController::class, 'show'])->middleware('auth');
+Route::get('/profiles/{user}/edit', [RegisteredUserController::class, 'edit'])->middleware('auth');
+Route::patch('/profiles/{user}', [RegisteredUserController::class, 'update'])->middleware('auth');
+Route::delete('/profiles/{user}', [RegisteredUserController::class, 'destroy'])->middleware('auth');
 
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');

@@ -55,10 +55,11 @@
                     @auth
                     <div class="sm:flex sm:gap-4">
                         <x-nav-button href="/questions/create">Ask a question</x-nav-button>
+                        <x-nav-button type="secondary" href="/profiles/{{ Auth::user()->id }}/edit">Profile</x-nav-button>
                         <form method="POST" action="/logout">
                             @csrf
                             @method('DELETE')
-                            <x-button type="secondary">Logout</x-button>
+                            <x-button type="warning">Logout</x-button>
                         </form>
                     </div>
                     @endauth

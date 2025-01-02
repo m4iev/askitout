@@ -22,30 +22,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        // $userAttributes = $request->validate([
-        //     'name' => ['required'],
-        //     'email' => ['required', 'email', 'unique:users,email'],
-        //     'password' => ['required', 'confirmed', Password::min(6)],
-        // ]);
-
-        // $employerAttributes = $request->validate([
-        //     'employer' => ['required'],
-        //     'logo' => ['required', File::types(['png', 'jpg', 'webp'])],
-        // ]);
-
-        // $user = User::create($userAttributes);
-
-        // $logoPath = $request->logo->store('logos');
-
-        // $user->employer()->create([
-        //     'name' => $employerAttributes['employer'],
-        //     'logo' => $logoPath,
-        // ]);
-
-        // Auth::login($user);
-
-        // return redirect('/');
-
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
@@ -61,7 +37,7 @@ class RegisteredUserController extends Controller
         ]);
 
         Auth::login($user);
-        
+
         return redirect('/');
     }
 
@@ -70,7 +46,7 @@ class RegisteredUserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        // 
     }
 
     /**
@@ -78,7 +54,9 @@ class RegisteredUserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('profile.edit', [
+            'user_name' => $user->name
+        ]);
     }
 
     /**
@@ -86,7 +64,15 @@ class RegisteredUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $attribute = $request->validate([
+            'name' => ['required']
+        ]);
+
+        $user->update([
+            'name' => $attribute['name']
+        ]);
+
+        return redirect("/profiles/{$user->id}/edit");
     }
 
     /**
