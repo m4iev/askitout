@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\File;
 
 class RegisteredUserController extends Controller
 {
@@ -65,11 +66,16 @@ class RegisteredUserController extends Controller
     public function update(Request $request, User $user)
     {
         $attribute = $request->validate([
-            'name' => ['required']
+            'name' => ['required'],
+            'profile_pic' => [File::types(['png', 'jpg', 'jpeg', 'webp'])]
         ]);
 
+        $picture_path = $request->file('profile_pic')->store('images');
+        // $picture_path = \Illuminate\Support\Facades\Storage::putFile('images', $request->file('profile_pic'));
+
         $user->update([
-            'name' => $attribute['name']
+            'name' => $attribute['name'],
+            'photo' => $picture_path
         ]);
 
         return redirect("/profiles/{$user->id}/edit");
