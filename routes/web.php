@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +21,10 @@ Route::post('/questions', [QuestionController::class, 'store'])->middleware('aut
 
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/tag/{tag:name}', [TagController::class, 'show']);
+
+Route::post('/answers', [AnswerController::class, 'store'])->middleware('auth');
+
+Route::post('/comments', [CommentController::class, 'store'])->middleware('auth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create']);
