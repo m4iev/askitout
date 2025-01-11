@@ -55,7 +55,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        $question = Question::find($question->id);
+        $question = Question::with(["user", "answers", "tags", "comments", "votes"])->find($question->id);
         return view('questions.show', [
             'question' => $question
         ]);

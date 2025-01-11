@@ -26,6 +26,10 @@ Route::post('/answers', [AnswerController::class, 'store'])->middleware('auth');
 
 Route::post('/comments', [CommentController::class, 'store'])->middleware('auth');
 
+Route::post('/votes', [VoteController::class, 'store'])->middleware('auth');
+Route::put('/votes', [VoteController::class, 'update'])->middleware('auth');
+Route::delete('/votes', [VoteController::class, 'destroy'])->middleware('auth');
+
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create']);
     Route::post('/register', [RegisteredUserController::class, 'store']);
@@ -36,7 +40,7 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/profiles/{user}', [RegisteredUserController::class, 'show'])->middleware('auth');
 Route::get('/profiles/{user}/edit', [RegisteredUserController::class, 'edit'])->middleware('auth');
-Route::patch('/profiles/{user}', [RegisteredUserController::class, 'update'])->middleware('auth');
+Route::put('/profiles/{user}', [RegisteredUserController::class, 'update'])->middleware('auth');
 Route::delete('/profiles/{user}', [RegisteredUserController::class, 'destroy'])->middleware('auth');
 
 Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('auth');

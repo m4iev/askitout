@@ -4,7 +4,7 @@
     <form action="/profiles/{{ Auth::user()->id }}" method="POST" enctype="multipart/form-data" id="ProfileForm"
         class="flex flex-col mx-auto px-3 w-3/4 md:w-1/2 mt-3 gap-3">
         @csrf
-        @method('PATCH')
+        @method('PUT')
         <div>
             <label for="Name"
                 class="block overflow-hidden rounded-md border border-gray-200 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 dark:border-gray-700 dark:bg-gray-800">

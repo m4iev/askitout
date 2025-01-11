@@ -1,11 +1,5 @@
 <x-layout>
-    <!--
-  Heads up! 👋
-
-  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
--->
-
-    <section class="h-full relative bg-hero-image bg-cover bg-center bg-no-repeat">
+    <section class="relative h-full bg-hero-image bg-cover bg-center bg-no-repeat">
         <div
             class="absolute inset-0 bg-gray-900/75 sm:bg-transparent sm:from-gray-900/95 sm:to-gray-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l">
         </div>
@@ -24,7 +18,7 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-4 text-center">
-                    <a href="{{ Auth::check() ? '/questions/create' : '/register' }}"
+                    <a href="{{ Auth::check() ? "/questions/create" : "/register" }}"
                         class="block w-full rounded bg-teal-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
                         Ask a question
                     </a>
