@@ -31,15 +31,11 @@ class VoteController extends Controller
     {
         $attributes = $request->validate([
             "vote" => ["required", Rule::in(["up", "down"])],
-            "voteable_type" => ["required", Rule::in(["App\Models\Answer", "App\Models\Questions"])],
+            "voteable_type" => ["required", Rule::in(["App\Models\Answer", "App\Models\Question"])],
             "voteable_id" => ["required"],
         ]);
 
-        if ($attributes["vote"] == "up") {
-            $attributes["vote"] = 1;
-        } else {
-            $attributes["vote"] = -1;
-        }
+        $attributes["vote"] = ($attributes["vote"] == "up") ? 1 : -1;
 
         auth()->user()->votes()->create($attributes);
 
@@ -67,14 +63,40 @@ class VoteController extends Controller
      */
     public function update(Request $request, Vote $vote)
     {
-        //
+        $request->validate([
+            "vote" => ["required", Rule::in(["up", "down"])],
+            "voteable_type" => ["required", Rule::in(["App\Models\Answer", "App\Models\Question"])],
+            "voteable_id" => ["required"],
+        ]);
+
+        $vote = ($request["vote"] == "up") ? 1 : -1;
+
+        $user_vote = auth()->user()->votes()->where("voteable_type", "=", $request['voteable_type'])
+            ->where("voteable_id", "=", $request['voteable_id'])
+            ->first();
+
+        $user_vote->vote = $vote;
+
+        $user_vote->save();
+
+        return back();
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vote $vote)
+    public function destroy(Request $request, Vote $vote)
     {
-        //
+        $request->validate([
+            "voteable_type" => ["required", Rule::in(["App\Models\Answer", "App\Models\Question"])],
+            "voteable_id" => ["required"],
+        ]);
+
+        $user_vote = auth()->user()->votes()->where("voteable_type", "=", $request['voteable_type'])
+            ->where("voteable_id", "=", $request['voteable_id'])
+            ->delete();
+
+        return back();
     }
 }

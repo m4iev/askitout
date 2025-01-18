@@ -1,11 +1,8 @@
-@php
-    $question_vote = auth()
-        ->user()
-        ->votes()
-        ->where("voteable_type", "=", "App\Models\Questions")
-        ->where("voteable_id", "=", $question->id)
-        ->get();
-@endphp
+@auth
+    @php
+        $question_vote = $question->votes()->get();
+    @endphp
+@endauth
 <x-layout>
     <div class="mx-auto mt-3 w-full rounded-lg bg-gray-900 p-6 shadow md:w-3/4">
         {{-- Question Header --}}
@@ -24,19 +21,41 @@
         <div class="flex gap-6">
             {{-- Question Voting --}}
             <div class="flex flex-col items-center">
-                <form action="/votes" method="POST">
-                    @if (count($question_vote) == 1)
-                        @if ($question_vote->vote == 1)
-                            @method("DELETE")
-                        @else
-                            @method("PUT")
+                @auth
+                    @php
+                        $user_question_vote = auth()
+                            ->user()
+                            ->votes()
+                            ->where("voteable_type", "=", "App\Models\Question")
+                            ->where("voteable_id", "=", $question->id)
+                            ->get();
+                    @endphp
+                @endauth
+                @php
+                    $total_question_votes = 0;
+                    foreach ($question_vote as $vote) {
+                        $total_question_votes += $vote->vote;
+                    }
+                @endphp
+                <form action="/votes" method="POST" id="questionVoteUp">
+                    @auth
+                        @if (count($user_question_vote) == 1)
+                            @if ($user_question_vote[0]->vote == 1)
+                                @php
+                                    $question_voteup_color = "teal-600";
+                                @endphp
+                                @method("DELETE")
+                            @else
+                                @method("PUT")
+                            @endif
                         @endif
-                    @endif
+                    @endauth
                     @csrf
                     <input type="hidden" name="voteable_type" value="App\Models\Question">
                     <input type="hidden" name="voteable_id" value="{{ $question->id }}">
                     <input type="hidden" name="vote" value="up">
-                    <button type="submit" class="p-2 text-white transition-colors hover:text-teal-600">
+                    <button type="submit"
+                        class="text-{{ isset($question_voteup_color) ? $question_voteup_color : "white" }} p-2 transition-colors hover:text-teal-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
@@ -44,21 +63,27 @@
                     </button>
                 </form>
 
-                <span class="my-2 text-xl font-bold text-white">{{ count($question->votes) }}</span>
+                <span class="my-2 text-xl font-bold text-white">{{ $total_question_votes }}</span>
 
                 <form action="/votes" method="POST">
-                    @if (count($question_vote) == 1)
-                        @if ($question_vote->vote == -1)
-                            @method("DELETE")
-                        @else
-                            @method("PUT")
+                    @auth
+                        @if (count($user_question_vote) == 1)
+                            @if ($user_question_vote[0]->vote == -1)
+                                @php
+                                    $question_votedown_color = "teal-600";
+                                @endphp
+                                @method("DELETE")
+                            @else
+                                @method("PUT")
+                            @endif
                         @endif
-                    @endif
+                    @endauth
                     @csrf
                     <input type="hidden" name="voteable_type" value="App\Models\Question">
                     <input type="hidden" name="voteable_id" value="{{ $question->id }}">
                     <input type="hidden" name="vote" value="down">
-                    <button type="submit" class="p-2 text-white transition-colors hover:text-teal-600">
+                    <button type="submit"
+                        class="text-{{ isset($question_votedown_color) ? $question_votedown_color : "white" }} p-2 transition-colors hover:text-teal-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -99,31 +124,46 @@
             {{-- Answer List --}}
             <div class="space-y-4">
                 @foreach ($question->answers as $answer)
+                    @auth
+                        @php
+                            $user_vote = auth()
+                                ->user()
+                                ->votes()
+                                ->where("voteable_type", "=", "App\Models\Answer")
+                                ->where("voteable_id", "=", $answer->id)
+                                ->get();
+                        @endphp
+                    @endauth
                     @php
-                        $answer_vote = auth()
-                            ->user()
-                            ->votes()
-                            ->where("voteable_type", "=", "App\Models\Answers")
-                            ->where("voteable_id", "=", $answer->id)
-                            ->get();
+                        $answer_votes = $answer->votes()->get();
+                        $total_votes = 0;
+                        foreach ($answer_votes as $vote) {
+                            $total_votes += $vote->vote;
+                        }
                     @endphp
                     <div class="border-b border-gray-700 pb-4">
                         <div class="flex gap-6">
                             {{-- Answer Voting --}}
                             <div class="flex flex-col items-center">
                                 <form action="/votes" method="POST">
-                                    @if (count($answer_vote) == 1)
-                                        @if ($answer_vote->vote == 1)
-                                            @method("DELETE")
-                                        @else
-                                            @method("PUT")
+                                    @auth
+                                        @if (count($user_vote) == 1)
+                                            @if ($user_vote[0]->vote == 1)
+                                                @php
+                                                    $voteup_color = "teal-600";
+                                                @endphp
+                                                @method("DELETE")
+                                            @else
+                                                @method("PUT")
+                                            @endif
                                         @endif
-                                    @endif
+                                    @endauth
                                     @csrf
                                     <input type="hidden" name="voteable_type" value="App\Models\Answer">
                                     <input type="hidden" name="voteable_id" value="{{ $answer->id }}">
                                     <input type="hidden" name="vote" value="up">
-                                    <button type="submit" class="p-2 text-white transition-colors hover:text-teal-600">
+                                    <button type="submit"
+                                        class="text-{{ isset($voteup_color) ? $voteup_color : "white" }} p-2 transition-colors hover:text-teal-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -132,22 +172,27 @@
                                     </button>
                                 </form>
 
-                                <span class="my-1 text-lg font-bold text-white">{{ count($answer->votes) }}</span>
+                                <span class="my-1 text-lg font-bold text-white">{{ $total_votes }}</span>
 
                                 <form action="/votes" method="POST">
-                                    @if (count($answer_vote) == -1)
-                                        @if ($answer_vote->vote == 1)
-                                            @method("DELETE")
-                                        @else
-                                            @method("PUT")
+                                    @auth
+                                        @if (count($user_vote) == 1)
+                                            @if ($user_vote[0]->vote == -1)
+                                                @php
+                                                    $votedown_color = "teal-600";
+                                                @endphp
+                                                @method("DELETE")
+                                            @else
+                                                @method("PUT")
+                                            @endif
                                         @endif
-                                    @endif
+                                    @endauth
                                     @csrf
                                     <input type="hidden" name="voteable_type" value="App\Models\Answer">
                                     <input type="hidden" name="voteable_id" value="{{ $answer->id }}">
                                     <input type="hidden" name="vote" value="down">
                                     <button type="submit"
-                                        class="p-2 text-white transition-colors hover:text-teal-600">
+                                        class="text-{{ isset($votedown_color) ? $votedown_color : "white" }} p-2 transition-colors hover:text-teal-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
