@@ -66,7 +66,11 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        $question = Question::findOrFail($question->id);
+
+        return view('questions.edit', [
+            'question' => $question
+        ]);
     }
 
     /**
@@ -74,7 +78,23 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $questionAttributes = $request->validate([
+            'title' => ['required', 'max:255'],
+            'body' => ['required'],
+            'tags' => ['nullable']
+        ]);
+
+        $question->update($questionAttributes);
+
+        $question->tags()->delete();
+
+        if ($questionAttributes['tags'] ?? false) {
+            foreach (explode(',', $questionAttributes['tags']) as $tag) {
+                $question->tag(name: $tag);
+            }
+        }
+
+        return redirect("/questions/{$question->id}");
     }
 
     /**
@@ -82,6 +102,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return back();
     }
 }

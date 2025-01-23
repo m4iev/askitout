@@ -56,7 +56,8 @@ class RegisteredUserController extends Controller
     public function edit(User $user)
     {
         return view('profile.edit', [
-            'user_name' => $user->name
+            'user_name' => $user->name,
+            'questions' =>  $user->questions()->simplePaginate(),
         ]);
     }
 

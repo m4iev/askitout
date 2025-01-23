@@ -1,8 +1,6 @@
-@auth
-    @php
+@php
         $question_vote = $question->votes()->get();
-    @endphp
-@endauth
+@endphp
 <x-layout>
     <div class="mx-auto mt-3 w-full rounded-lg bg-gray-900 p-6 shadow md:w-3/4">
         {{-- Question Header --}}
@@ -135,6 +133,8 @@
                         @endphp
                     @endauth
                     @php
+                        unset($voteup_color);
+                        unset($votedown_color);
                         $answer_votes = $answer->votes()->get();
                         $total_votes = 0;
                         foreach ($answer_votes as $vote) {

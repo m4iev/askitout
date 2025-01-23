@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('question_tag', function (Blueprint $table) {
-            $table->foreignIdFor(Question::class);
+            $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Tag::class);
         });
     }
