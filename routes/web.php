@@ -28,7 +28,7 @@ Route::post('/questions', [QuestionController::class, 'store'])->middleware('aut
 
 
 Route::get('/tags', [TagController::class, 'index']);
-Route::get('/tag/{tag:name}', [TagController::class, 'show']);
+Route::get('/tags/{tag:name}', [TagController::class, 'show']);
 
 Route::post('/answers', [AnswerController::class, 'store'])->middleware('auth');
 
@@ -46,7 +46,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [SessionController::class, 'store'])->name('login');
 });
 
-Route::get('/profiles/{user}', [RegisteredUserController::class, 'show'])->middleware('auth');
+Route::get('/profiles/{user}', [RegisteredUserController::class, 'show']);
 Route::get('/profiles/{user}/edit', [RegisteredUserController::class, 'edit'])->middleware('auth')->can('edit', 'user');
 Route::put('/profiles/{user}', [RegisteredUserController::class, 'update'])->middleware('auth')->can('update', 'user');
 Route::delete('/profiles/{user}', [RegisteredUserController::class, 'destroy'])->middleware('auth')->can('delete', 'user');

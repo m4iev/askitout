@@ -47,7 +47,10 @@ class RegisteredUserController extends Controller
      */
     public function show(User $user)
     {
-        // 
+        return view('profiles.show', [
+            'user'=> $user,
+            'questions' => $user->questions()->simplePaginate()
+        ]);
     }
 
     /**
@@ -55,7 +58,7 @@ class RegisteredUserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('profile.edit', [
+        return view('profiles.edit', [
             'user_name' => $user->name,
             'questions' =>  $user->questions()->simplePaginate(),
         ]);

@@ -39,7 +39,11 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return ":) {$tag->name}";
+        $questions = $tag->questions()->simplePaginate();
+        return view("tags.show", [
+            'tag' => $tag,
+            'questions' => $questions
+        ]);
     }
 
     /**

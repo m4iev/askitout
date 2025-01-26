@@ -4,7 +4,7 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-8 gap-3 px-3 py-3 text-center">
             @foreach ($tags as $tag)
-                <x-pill-btn href="/tag/{{ $tag->name }}">{{ $tag->name }}</x-pill-btn>
+                <x-pill-btn href="/tags/{{ $tag->name }}">{{ $tag->name }}</x-pill-btn>
             @endforeach
         </div>
     </section>
