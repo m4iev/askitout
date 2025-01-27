@@ -10,7 +10,7 @@
             </h1>
             <div class="flex items-center text-sm text-white">
                 <span class="mr-4">Asked {{ $question->created_at->diffForHumans() }}</span>
-                <span class="-ml-3">by <a href="/users/{{ $question->user->id }}"
+                <span class="-ml-3">by <a href="/profiles/{{ $question->user->id }}"
                         class="text-blue-600 hover:underline">{{ $question->user->name }}</a></span>
             </div>
         </div>
@@ -205,7 +205,7 @@
                             <div class="flex-1">
                                 <p class="mb-2 text-gray-300">{{ $answer->body }}</p>
                                 <div class="flex items-center text-sm text-gray-500">
-                                    <span class="mr-2">by <a href="/users/{{ $answer->user->id }}"
+                                    <span class="mr-2">by <a href="/profiles/{{ $answer->user->id }}"
                                             class="text-blue-600 hover:underline">{{ $answer->user->name }}</a></span>
                                     <span>{{ $answer->created_at->diffForHumans() }}</span>
                                 </div>
@@ -221,7 +221,7 @@
                                             <div class="flex-1">
                                                 <p class="mb-2 text-gray-300">{{ $comment->body }}</p>
                                                 <div class="flex items-center text-sm text-gray-500">
-                                                    <span class="mr-2">by <a href="/users/{{ $comment->user->id }}"
+                                                    <span class="mr-2">by <a href="/profiles/{{ $comment->user->id }}"
                                                             class="text-blue-600 hover:underline">{{ $comment->user->name }}</a></span>
                                                     <span>{{ $comment->created_at->diffForHumans() }}</span>
                                                 </div>

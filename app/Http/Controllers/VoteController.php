@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Question;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -35,9 +37,33 @@ class VoteController extends Controller
             "voteable_id" => ["required"],
         ]);
 
+        // add 5 reputation for the author, whether it is a positive vote or negative vote
+        switch ($attributes["voteable_type"]) {
+            case "App\Models\Answer":
+                $answer = Answer::find($attributes["voteable_id"]);
+                $answer->user->update([
+                    'reputation' => $answer->user->reputation + 5,
+                ]);
+                break;
+            default:
+                $question = Question::find($attributes["voteable_id"]);
+                $question->user->update([
+                    'reputation' => $question->user->reputation + 5,
+                ]);
+                break;
+        }
+
+        $user = auth()->user();
+
         $attributes["vote"] = ($attributes["vote"] == "up") ? 1 : -1;
 
-        auth()->user()->votes()->create($attributes);
+        $user->votes()->create($attributes);
+
+
+        // add 2 reputation to user for voting activity
+        $user->update([
+            'reputation' => $user->reputation + 2
+        ]);
 
         return back();
     }

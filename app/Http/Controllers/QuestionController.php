@@ -39,6 +39,11 @@ class QuestionController extends Controller
             'tags' => ['nullable']
         ]);
 
+        $user = auth()->user();
+        $user->update([
+            'reputation' => $user->reputation + 10
+        ]);
+
         $question = Auth::user()->questions()->create($questionAttributes);
 
         if ($questionAttributes['tags'] ?? false) {
