@@ -1,5 +1,7 @@
 <x-layout>
-    <section class="relative h-full bg-hero-image bg-cover bg-center bg-no-repeat">
+    <section
+        class="relative h-full bg-gradient-to-br from-teal-600 via-blue-500 to-rose-500"
+    >
         <div
             class="absolute inset-0 bg-gray-900/75 sm:bg-transparent sm:from-gray-900/95 sm:to-gray-900/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l">
         </div>
