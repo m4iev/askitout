@@ -14,9 +14,9 @@ Ask It Out is a Laravel-based Q&A platform where users can ask and answer questi
 
 Below are previews of the application from the `Screenshots` folder:
 
-| Home Page | Ask Question | Questions List |
-|-----------|--------------|---------------|
-| <img src="Screenshots/home.png" alt="Home" width="300"/> | <img src="Screenshots/ask.png" alt="Ask" width="300"/> | <img src="Screenshots/list.png" alt="List" width="300"/> |
+| Home Page | Ask Question | Questions List | Question Detail | Profile |
+|-----------|--------------|---------------|----------------|---------|
+| <img src="Screenshots/home.png" alt="Home" width="220"/> | <img src="Screenshots/question-create.png" alt="Ask" width="220"/> | <img src="Screenshots/question-list.png" alt="List" width="220"/> | <img src="Screenshots/question-view.png" alt="Detail" width="220"/> | <img src="Screenshots/profile.png" alt="Profile" width="220"/> |
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ Below are previews of the application from the `Screenshots` folder:
 
 1. **Clone the repository:**
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/m4iev/askitout.git
     cd askitout
     ```
 
