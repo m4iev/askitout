@@ -12,11 +12,11 @@ Ask It Out is a Laravel-based Q&A platform where users can ask and answer questi
 
 ## Screenshots
 
-Find previews of the application in the `Screenshoots` folder:
+Below are previews of the application from the `Screenshots` folder:
 
 | Home Page | Ask Question | Questions List |
 |-----------|--------------|---------------|
-| ![Home](Screenshoots/home.png) | ![Ask](Screenshoots/ask.png) | ![List](Screenshoots/list.png) |
+| <img src="Screenshots/home.png" alt="Home" width="300"/> | <img src="Screenshots/ask.png" alt="Ask" width="300"/> | <img src="Screenshots/list.png" alt="List" width="300"/> |
 
 ## Getting Started
 
@@ -77,8 +77,8 @@ Find previews of the application in the `Screenshoots` folder:
 - `app/` - Laravel backend code
 - `resources/views/` - Blade templates
 - `public/` - Public assets
-- `Screenshoots/` - Application screenshots
+- `Screenshots/` - Application screenshots
 
 ---
 
-**Enjoy using Ask It
+**Enjoy using Ask It Out!**
